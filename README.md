@@ -8,11 +8,11 @@ En effet, que ce soit sur l'AppStore ou le PlayStore, vous serez obligé d'uploa
 
 Vous risquez donc, en cas de bug bloquant, de frustrer tous les prochains utilisateurs jusqu'à la prochaine version et générer ainsi des avis négatifs et mauvaises notes pour votre application.
 
-Heureusement, il existe une solution à ce problème qui va vous permttre de mettre à jour votre application **sans passer par le store** qui est [CodePush](https://microsoft.github.io/code-push/).
+Heureusement, il existe une solution à ce problème qui va vous permettre de mettre à jour votre application **sans passer par le store** qui est [CodePush](https://microsoft.github.io/code-push/).
 
 ## CodePush, un service
 
-CodePush est un cloud service mis en avant par Microsoft qui offre aux développeurs React Native et Cordova, un moyen pour déployer des mises à jours directement sur le téléphone de leurs utilisateurs.
+CodePush est un service hébergé mis en avant par Microsoft qui offre aux développeurs React Native et Cordova, un moyen pour déployer des mises à jour directement sur le téléphone de leurs utilisateurs.
 
 Cela fonctionne simplement par un système de repo, vous allez envoyer votre build JavaScript au service qui va faire la liaison avec l'application qui utilise le SDK fourni.
 
@@ -121,7 +121,7 @@ code-push release-react MyApp-ios ios
 ```
 
 À cela, il est possible d'ajouter plusieurs options très intéressantes : 
-- Une description
+- une description
 - La version à partir de laquelle la mise à jour peut être installée
 - L'environnement, qui est par défaut sur `Staging`
 
@@ -133,12 +133,12 @@ Voilà votre première release effectuée !
 
 ## Effectuer un rollback
 
-Reprenons notre cas du début, ou l'on déploit malencontreusement une version de notre app avec un bug via CodePush. Il est très simple d'effectuer un rollback sur la dernière version, tout cela en CLI :
+Reprenons notre cas du début, ou l'on déploie malencontreusement une version de notre app avec un bug via CodePush. Il est très simple d'effectuer un rollback sur la dernière version, tout cela en CLI :
 ```
 code-push rollback MyApp-ios Production
 ```
 
-Par défaut, CodePush va prendre la version précédente à la plus récente, dans le cas ou vous souhaitez faire un retour arrière sur plusieurs versions, il vous suffit de spécifiez le paramètre `--targetRelease` qui va se baser sur les labels de chaque release (v2, v3, etc..) : 
+Par défaut, CodePush va prendre la version précédente à la plus récente, dans le cas où vous souhaitez faire un retour arrière sur plusieurs versions, il vous suffit de spécifier le paramètre `--targetRelease` qui va se baser sur les labels de chaque release (v2, v3, etc..) : 
 ```
 code-push rollback MyApp-ios Production --targetRelease v3
 ```
@@ -179,4 +179,4 @@ Lorsqu'une mise à jour sera disponible et que l'utilisateur appuiera sur le bou
 
 ![Installation manuelle](screenshots/manual_update.png)
 
-**Note :** Il est important de savoir que cela n'est **pas autorisé par les règles d'Apple** et ne valideront pas votre application ! Cependant c'est tout à fait autorisé sur Android.
+**Note :** Il est important de savoir que cela n'est **pas autorisé par les règles d'Apple** et ne valideront pas votre application ! Cependant rien ne vous empêche de le faire sur Android.
