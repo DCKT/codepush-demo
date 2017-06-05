@@ -12,11 +12,12 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
-
+#import <React/RCTLog.h>
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  RCTSetLogThreshold(RCTLogLevelInfo);
   NSURL *jsCodeLocation;
 
   
@@ -30,7 +31,12 @@
                                                       moduleName:@"CodePushDemo"
                                                initialProperties:nil
                                                    launchOptions:launchOptions];
+
+#ifdef DEBUG
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
+#else
+  rootView.backgroundColor = [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:1];
+#endif
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];

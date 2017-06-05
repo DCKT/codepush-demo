@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#F5FCFF"
+    backgroundColor: "rgb(255,0,0)"
   },
   welcome: {
     fontSize: 20,
@@ -41,6 +41,6 @@ const styles = StyleSheet.create({
 });
 
 export default codePush({
-  checkFrequency: CheckFrequency.ON_APP_RESUME,
-  mandatoryInstallMode: InstallMode.IMMEDIATE
+  mandatoryInstallMode: InstallMode.IMMEDIATE,
+  checkFrequency: CheckFrequency.ON_APP_RESUME
 })(App);

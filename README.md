@@ -112,3 +112,19 @@ Le SDK nous offre 3 façons de vérifier la présence d'une mise à jour :
 - `ON_NEXT_RESTART` : comportement par défaut, installe la MAJ au prochain redémarrage
 - `ON_NEXT_RESUME` : installe la mise à jour lorsque l'application sort du mode tâche de fond
 
+## Déployer son application
+
+Maintenant que le SDK est configuré dans notre application, nous pouvons dès à présent créer notre première "release". Pour cela, nous devons utiliser l'outil de CLI de CodePush :
+```
+code-push release-react MyApp-android android
+code-push release-react MyApp-ios ios
+```
+
+À cela, il est possible d'ajouter plusieurs options très intéressantes : 
+- Une description
+- La version à partir de laquelle la mise à jour peut être installée
+- L'environnement, qui est par défaut sur `Staging`
+
+```
+code-push release-react MyApp-ios ios -d Production --targetBinaryVersion '~1.0.0' -m --description "Fix background"
+```
