@@ -128,3 +128,18 @@ code-push release-react MyApp-ios ios
 ```
 code-push release-react MyApp-ios ios -d Production --targetBinaryVersion '~1.0.0' -m --description "Fix background"
 ```
+
+Voilà votre première release effectuée !
+
+## Effectuer un rollback
+
+Reprenons notre cas du début, ou l'on déploit malencontreusement une version de notre app avec un bug via CodePush. Il est très simple d'effectuer un rollback sur la dernière version, tout cela en CLI :
+```
+code-push rollback MyApp-ios Production
+```
+
+Par défaut, CodePush va prendre la version précédente à la plus récente, dans le cas ou vous souhaitez faire un retour arrière sur plusieurs versions, il vous suffit de spécifiez le paramètre `--targetRelease` qui va se baser sur les labels de chaque release (v2, v3, etc..) : 
+```
+code-push rollback MyApp-ios Production --targetRelease v3
+```
+
