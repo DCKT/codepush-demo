@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { AppRegistry, StyleSheet, Text, View } from "react-native";
+import codePush, { CheckFrequency, InstallMode } from "react-native-code-push";
 
 class App extends Component {
   render() {
@@ -39,4 +40,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default App;
+export default codePush({
+  checkFrequency: CheckFrequency.ON_APP_RESUME,
+  mandatoryInstallMode: InstallMode.IMMEDIATE
+})(App);

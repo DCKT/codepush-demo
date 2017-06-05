@@ -62,3 +62,53 @@ react-native link react-native-code-push
 ```
 
 Il vous sera alors demandé de renseigner les clés de production pour le déploiement Android et iOS.
+Nous pouvons dès à présent utiliser le SDK dans notre application.
+
+Pour utiliser le SDK, c'est très simple, il suffit d'utiliser un "Higher Order Component" (HOC) sur la base de notre application ici `App.js`.
+
+```javascript
+import React from 'react'
+import codePush from 'react-native-code-push'
+
+class App extends React.Component {
+  ...
+}
+
+export default codePush(App)
+```
+
+Votre application peut désormais être mis à jour via CodePush ! Lorsque vous ne spécifiez aucune option, par défaut CodePush va vérifier s'il y a une mise à jour au démarrage de l'application et s'il en trouve une, la télécharger en tache de fond pour l'installer la prochaine fois que l'utilisateur va redémarrer l'app.
+
+#### Modifier la fréquence de vérification
+
+Bien évidemment, il est possible de modifier la fréquence à laquelle on vérifie s'il y a une mise à jour et le moment durant laquelle il faut l'installer.
+Pour cela, il vous suffit de passer un object au SDK comme ceci :
+```javascript
+import codePush, { CheckFrequency } from 'react-native-code-push'
+...
+export default codePush({
+  checkFrequency: CheckFrequency.ON_APP_RESUME
+})(App)
+```
+
+Le SDK nous offre 3 façons de vérifier la présence d'une mise à jour :
+- `ON_APP_START` : uniquement au démarrage du processus de l'application
+- `ON_APP_RESUME` : lorsque l'application sort du mode tâche de fond
+- `MANUAL` : désactive la vérification automatique et attends l'appel de la méthode `codePush.sync()`
+
+#### Modifier le type d'installation
+
+Par défaut, CodePush va installer le nouveau bundle seulement lorsque l'application sera redémarée. Il vous est possible d'installer la mise à jour de manière immédiate lorsque celle-ci est téléchargée.
+```javascript
+import codePush, { CheckFrequency, InstallMode } from 'react-native-code-push'
+...
+export default codePush({
+  mandatoryInstallMode: InstallMode.IMMEDIATE
+})(App)
+```
+
+Le SDK nous offre 3 façons de vérifier la présence d'une mise à jour :
+- `IMMEDIATE` : met à jour et redémarre instantanément l'application
+- `ON_NEXT_RESTART` : comportement par défaut, installe la MAJ au prochain redémarrage
+- `ON_NEXT_RESUME` : installe la mise à jour lorsque l'application sort du mode tâche de fond
+
