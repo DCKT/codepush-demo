@@ -143,3 +143,40 @@ Par défaut, CodePush va prendre la version précédente à la plus récente, da
 code-push rollback MyApp-ios Production --targetRelease v3
 ```
 
+## Mettre à jour manuellement
+
+Il arrive que dans certains cas, vous souhaitiez permettre à l'utilisateur de mettre à jour l'application à travers un bouton affichant une fenêtre d'action.
+Il suffit de passer le paramètre `updateDialog` à `true` ou bien de lui passer un objet de configuration. Voici un petit exemple : 
+
+```javascript
+import codePush, { CheckFrequency, InstallMode } from "react-native-code-push";
+
+class App extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <TouchableOpacity onPress={this._checkUpdates}>
+          <Text>Check for updates</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  _checkUpdates() {
+    codePush.sync({
+      updateDialog: true,
+      installMode: InstallMode.IMMEDIATE
+    });
+  }
+}
+
+export default codePush({
+  checkFrequency: CheckFrequency.MANUAL
+})(App);
+```
+
+Lorsqu'une mise à jour sera disponible et que l'utilisateur appuiera sur le bouton, il aura une fenêtre (native) lui proposant d'installer la mise à jour :
+
+![Installation manuelle](screenshots/manual_update.png)
+
+**Note :** Il est important de savoir que cela n'est **pas autorisé par les règles d'Apple** et ne valideront pas votre application ! Cependant c'est tout à fait autorisé sur Android.
