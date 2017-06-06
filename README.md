@@ -182,3 +182,8 @@ Lorsqu'une mise à jour sera disponible et que l'utilisateur appuiera sur le bou
 Bien évidemment, vous pouvez modifier les différents textes [via l'objet que vous passez à l'option](https://github.com/Microsoft/react-native-code-push/blob/master/docs/api-js.md#codepushoptions) `updateDialog`.
 
 **Note :** Il est important de savoir que cela n'est **pas autorisé par les règles d'Apple** et ne valideront pas votre application ! Cependant rien ne vous empêche de le faire sur Android.
+
+## Pour conclure
+
+CodePush n'apporte que des avantages et est facile à installer/configurer. Je ne peux que vous le recommander.
+Vous pouvez également retrouver [les différents exemples sur Github](https://github.com/DCKT/codepush-demo).
