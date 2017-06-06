@@ -142,3 +142,47 @@ By default, CodePush will take the previous version of the most recent, in the c
 ```
 code-push rollback MyApp-ios Production --targetRelease v3
 ```
+
+## Update manually
+
+In some cases, you may need to offer to the user, the ability to check himself if there is an update.
+To do that with CodePush, you have to give the parameter `updateDialog` to `true` or an object configuration. Here is an example : 
+
+```javascript
+import codePush, { CheckFrequency, InstallMode } from "react-native-code-push";
+
+class App extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <TouchableOpacity onPress={this._checkUpdates}>
+          <Text>Check for updates</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  _checkUpdates() {
+    codePush.sync({
+      updateDialog: true,
+      installMode: InstallMode.IMMEDIATE
+    });
+  }
+}
+
+export default codePush({
+  checkFrequency: CheckFrequency.MANUAL
+})(App);
+```
+
+When the update will be available and the user will press the button, he will get a native modal suggesting him to install the update.
+
+![Manual update](screenshots/manual_update.png)
+
+Obviously, you can edit each text [via the params object](https://github.com/Microsoft/react-native-code-push/blob/master/docs/api-js.md#codepushoptions) `updateDialog`.
+
+**Note :** It's very important to know that this is **not allowed by the Apple guidelines** and they will not validate your app ! Howerver, you can do it on Android.
+
+## Conclusion
+
+CodePush has only advantages and is very easy to setup/configure. I can only recommand you to use it. You can retrive the different examples of this article on the [Github demo repo](https://github.com/DCKT/codepush-demo).
