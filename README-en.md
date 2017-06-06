@@ -78,3 +78,67 @@ export default codePush(App)
 ```
 
 Your app can now be updated by CodePush ! When you don't specify options, by default, CodePush will check if there is an update at the starting of the application, and if finds one, download it in background to install them at the next restart of the app.
+
+#### Edit the check frequency
+
+Of course, you can edit the frequency at which it checks if there is an update and when to install it.
+For it, you need to pass an object as a params like this :
+
+```javascript
+import codePush, { CheckFrequency } from 'react-native-code-push'
+...
+export default codePush({
+  checkFrequency: CheckFrequency.ON_APP_RESUME
+})(App)
+```
+
+The SDK offer us 3 ways to check update presence :
+- `ON_APP_START` : only when the app processus start
+- `ON_APP_RESUME` : when the application will go outside background mode
+- `MANUAL` : disallow the automatic checking and wait the call of `codePush.sync()` method.
+
+#### Edit install mode
+
+By default, CodePush will install the new bundle only at the application restart. It's possible for you to install the update immediatly after the download.
+```javascript
+import codePush, { CheckFrequency, InstallMode } from 'react-native-code-push'
+...
+export default codePush({
+  mandatoryInstallMode: InstallMode.IMMEDIATE
+})(App)
+```
+
+The SDK offer us 3 ways to install the update :
+- `IMMEDIATE` : update and restart the app
+- `ON_NEXT_RESTART` : default behavior, install the update after app restart
+- `ON_NEXT_RESUME` : install the update when the app will go outside background mode
+
+Now our SDK is well configured in our application, we can right create our first release with the CodePush CLI tool :
+```
+code-push release-react MyApp-android android
+code-push release-react MyApp-ios ios
+```
+
+To that, it's possible to add very interesting options :
+- a description
+- the version from which the update can be installed
+- the environment, who is by default on `Staging`
+
+```
+code-push release-react MyApp-ios ios -d Production --targetBinaryVersion '~1.0.0' -m --description "Fix background"
+```
+
+And voila ! Our first release is done !
+
+## Rollback
+
+Let us resume our case of the beginning, where we inconveniently released a bugged version of our app with CodePush. It's very fair to do a rollback on the previous version with the CLI : 
+```
+code-push rollback MyApp-ios Production
+```
+
+By default, CodePush will take the previous version of the most recent, in the case you need to back further in your app history, you simply need to put the parameter `--targetRelease` with the label's name release (v2, v3, etc...).
+
+```
+code-push rollback MyApp-ios Production --targetRelease v3
+```

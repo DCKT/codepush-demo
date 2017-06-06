@@ -107,7 +107,7 @@ export default codePush({
 })(App)
 ```
 
-Le SDK nous offre 3 façons de vérifier la présence d'une mise à jour :
+Le SDK nous offre 3 façons d'installer une mise à jour :
 - `IMMEDIATE` : met à jour et redémarre instantanément l'application
 - `ON_NEXT_RESTART` : comportement par défaut, installe la MAJ au prochain redémarrage
 - `ON_NEXT_RESUME` : installe la mise à jour lorsque l'application sort du mode tâche de fond
